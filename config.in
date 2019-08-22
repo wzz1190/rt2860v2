@@ -152,22 +152,25 @@ config  RT2860V2_ADJ_PWR_CONSUMPTION_SUPPORT
         depends on RALINK_MT7620 || RALINK_RT6352
 	default n
 
+config INTERNAL_PA_INTERNAL_LNA
+bool "INTERNAL_PA_INTERNAL_LNA"
+			depends on RT2860V2_AP 
+			default y
+			
+config INTERNAL_PA_EXTERNAL_LNA
+bool "INTERNAL_PA_EXTERNAL_LNA"
+			depends on RT2860V2_AP 
+			default n
+			
+config EXTERNAL_PA_EXTERNAL_LNA
+bool "EXTERNAL_PA_EXTERNAL_LNA"
+			depends on RT2860V2_AP
+			default n
+
 config  RT2860V2_SINGLE_SKU
 	bool "Single SKU"
 	depends on RT2860V2_AP
 	default n
-
-choice
-	prompt "Choose Power Design"
-        depends on RALINK_MT7620 || RALINK_RT6352
-	default INTERNAL_PA_INTERNAL_LNA
-	config  INTERNAL_PA_INTERNAL_LNA
-	bool "Internal PA and Internal LNA"
-	config  INTERNAL_PA_EXTERNAL_LNA
-	bool "Internal PA and External LNA"		
-	config  EXTERNAL_PA_EXTERNAL_LNA
-	bool "External PA and External LNA"		
-endchoice
 
 config  RT2860V2_AP_RTMP_INTERNAL_TX_ALC
         bool "TSSI Compensation"
