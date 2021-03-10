@@ -161,7 +161,7 @@ Channel=${channel:-11}
 BasicRate=15
 BeaconPeriod=100
 DtimPeriod=1
-TxPower=${txpower:-100}
+TxPower=${txpower:-398}
 DisableOLBC=0
 BGProtection=0
 TxAntenna=
@@ -699,7 +699,7 @@ Channel=11
 BasicRate=15
 BeaconPeriod=100
 DtimPeriod=1
-TxPower=100
+TxPower=398
 DisableOLBC=0
 BGProtection=0
 TxAntenna=
@@ -974,7 +974,7 @@ config wifi-device  ra${i}
 	option type     rt2860v2
 	option mode 	9
 	option channel  auto
-	option txpower 100
+	option txpower 398
 	option ht 20+40
     	option country US
 # REMOVE THIS LINE TO ENABLE WIFI:
