@@ -1198,7 +1198,7 @@ VOID	NICReadEEPROMParameters(
 	 		if ((value & 0x40) == 0)
 	   			pAd->BW_Power_Delta = -1* pAd->BW_Power_Delta;
 	 	}
-		DBGPRINT(RT_DEBUG_ERROR, ("E2PROM: 40 MW Power Delta= %d \n", pAd->BW_Power_Delta)); 
+		DBGPRINT(RT_DEBUG_ERROR, ("E2PROM: 100 MW Power Delta= %d \n", pAd->BW_Power_Delta)); 
 	}
 #endif /* RT6352 */
 
