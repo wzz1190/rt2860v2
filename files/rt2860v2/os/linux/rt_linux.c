@@ -316,7 +316,7 @@ void RtmpFlashRead(
 #ifdef RA_MTD_RW_BY_NUM
 	ra_mtd_read(MTD_NUM_FACTORY, 0, (size_t) b, p);
 #else
-	ra_mtd_read_nm("Factory", a&0xFFFF, (size_t) b, p);
+	ra_mtd_read_nm("factory", a&0xFFFF, (size_t) b, p);
 #endif
 #endif /* CONFIG_RALINK_FLASH_API */
 }
@@ -332,7 +332,7 @@ void RtmpFlashWrite(
 #ifdef RA_MTD_RW_BY_NUM
 	ra_mtd_write(MTD_NUM_FACTORY, 0, (size_t) b, p);
 #else
-	ra_mtd_write_nm("Factory", a&0xFFFF, (size_t) b, p);
+	ra_mtd_write_nm("factory", a&0xFFFF, (size_t) b, p);
 #endif
 #endif /* CONFIG_RALINK_FLASH_API */
 }
@@ -1168,19 +1168,20 @@ void RtmpOSFileSeek(RTMP_OS_FD osfd,
 	osfd->f_pos = offset;
 }
 
-int RtmpOSFileRead(RTMP_OS_FD osfd,
-		     char *pDataPtr, int readLen) {
-	/* The object must have a read method */
-	if (osfd->f_op && osfd->f_op->read) {
-		return osfd->f_op->read(osfd, pDataPtr, readLen, &osfd->f_pos);
-	} else {
-		DBGPRINT(RT_DEBUG_ERROR, ("no file read method\n"));
-		return -1;
-	}
+int RtmpOSFileRead(RTMP_OS_FD osfd, char *pDataPtr, int readLen)
+{
+    DBGPRINT(RT_DEBUG_ERROR, ("add: %p %p\n", osfd->f_op, osfd->f_op->read));
+        /* The object must have a read method */
+        if (osfd->f_op /*&& osfd->f_op->read*/) {
+                //return osfd->f_op->read(osfd, pDataPtr, readLen, &osfd->f_pos);
+                return vfs_read(osfd, pDataPtr, readLen, &osfd->f_pos);
+        } else {
+                DBGPRINT(RT_DEBUG_ERROR, ("no file read method\n"));
+                return -1;
+        }
 }
 
-int RtmpOSFileWrite(RTMP_OS_FD osfd,
-		    char *pDataPtr, int writeLen) {
+int RtmpOSFileWrite(RTMP_OS_FD osfd,char *pDataPtr, int writeLen) {
 	return osfd->f_op->write(osfd,
 				 pDataPtr,
 				 (
